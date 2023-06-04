@@ -140,4 +140,5 @@ int main(){
     lista->print();
     lista->deleta();
     lista->print();
+    return 0;
 }
