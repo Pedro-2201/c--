@@ -1,11 +1,11 @@
-#include "asg.hpp"
+#include "./vendedor.hpp"
 
 using namespace std;
 
-Asg::Asg(){
+Vendedor::Vendedor(){
 
 }
-Asg::Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, float adicionalInsalubridade){
+Vendedor::Vendedor(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, char tipoVendedor){
     this->nome = nome;
     this->cpf = cpf;
     this->dataNascimento = dataNascimento;
@@ -15,21 +15,28 @@ Asg::Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal,
     this->salario = salario;
     this->matricula = matricula;
     this->ingressoEmpresa = ingressoEmpresa;
-    this->adicionalInsalubridade = adicionalInsalubridade;
+    this->tipoVendedor = tipoVendedor;
 }
-void Asg::setAdicionalInsalubridade(float adicionalInsalubridade){
-    this->adicionalInsalubridade = adicionalInsalubridade;
+void Vendedor::setTipoVendedor(char tipoVendedor){
+    this->tipoVendedor = tipoVendedor;
 }
-float Asg::getAdicionalInsalubridade(){
-    return adicionalInsalubridade;
+char Vendedor::getTipoVendedor(){
+    return tipoVendedor;
 }
-float Asg::calcularSalario(int diasFaltas){
+float Vendedor::calcularSalario(int diasFaltas){
     float salarioLiquido = salario;
     salarioLiquido -= salarioLiquido / 30 * faltas;
+    if(tipoVendedor == 'a' || tipoVendedor == 'A'){
+        salarioLiquido += salario * 0,25;
+    }else if(tipoVendedor == 'b' || tipoVendedor == 'B'){
+        salarioLiquido += salario * 0,10;
+    }else{
+        salarioLiquido += salario * 0,05;
+    }
     salarioLiquido += 100 * qtdFilhos;
     return salarioLiquido;
 }
-float Asg::calcularRecisao(Data desligamento){
+float Vendedor::calcularRecisao(Data desligamento){
     float valorRescisao;
     int tempoTrabalho;
     if(desligamento.ano > ingressoEmpresa.ano){

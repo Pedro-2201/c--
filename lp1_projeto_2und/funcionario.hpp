@@ -5,7 +5,7 @@
 using namespace std;
 
 class Funcionario{
-    private:
+    protected:
     float salario; //mudei o salário para float
     string matricula;
     Data ingressoEmpresa;
@@ -17,7 +17,7 @@ class Funcionario{
     void setMatricula(string matricula);
     string getMatricula();
     void setIngressoEmpresa(Data ingressoEmpresa);
-    Data getIngressoEmpressa();
+    Data getIngressoEmpresa();
     void setFaltas(int faltas);
     float getFaltas();
     virtual float calcularSalario(int diasFaltas) = 0;

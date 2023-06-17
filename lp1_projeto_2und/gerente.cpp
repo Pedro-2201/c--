@@ -1,11 +1,11 @@
-#include "asg.hpp"
+#include "./gerente.hpp"
 
 using namespace std;
 
-Asg::Asg(){
+Gerente::Gerente(){
 
 }
-Asg::Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, float adicionalInsalubridade){
+Gerente::Gerente(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, float participacaoLucros){
     this->nome = nome;
     this->cpf = cpf;
     this->dataNascimento = dataNascimento;
@@ -15,21 +15,23 @@ Asg::Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal,
     this->salario = salario;
     this->matricula = matricula;
     this->ingressoEmpresa = ingressoEmpresa;
-    this->adicionalInsalubridade = adicionalInsalubridade;
+    this->participacaoLucros = participacaoLucros;
 }
-void Asg::setAdicionalInsalubridade(float adicionalInsalubridade){
-    this->adicionalInsalubridade = adicionalInsalubridade;
+void Gerente::setParticipacaoLucros(float participacaoLucros){
+    this->participacaoLucros = participacaoLucros;
 }
-float Asg::getAdicionalInsalubridade(){
-    return adicionalInsalubridade;
+float Gerente::getParticipacaoLucros(){
+    return participacaoLucros;
 }
-float Asg::calcularSalario(int diasFaltas){
+
+float Gerente::calcularSalario(int diasFaltas){
     float salarioLiquido = salario;
     salarioLiquido -= salarioLiquido / 30 * faltas;
+    salarioLiquido += participacaoLucros; 
     salarioLiquido += 100 * qtdFilhos;
     return salarioLiquido;
 }
-float Asg::calcularRecisao(Data desligamento){
+float Gerente::calcularRecisao(Data desligamento){
     float valorRescisao;
     int tempoTrabalho;
     if(desligamento.ano > ingressoEmpresa.ano){

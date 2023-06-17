@@ -12,7 +12,7 @@ class Asg : public Funcionario, public Pessoa{
 
     public:
     Asg();
-    Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, string salario, string matricula, Data ingressoEmpresa);
+    Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, float adicionalInsalubridade);
     void setAdicionalInsalubridade(float adicionalInsalubridade);
     float getAdicionalInsalubridade();
     float calcularSalario(int diasFaltas);
