@@ -1,15 +1,13 @@
 #ifndef EMPRESA_HPP
 #define EMPRESA_HPP
 
-#include "./pessoa.hpp"
-#include "./asg.hpp"
-#include "./vendedor.hpp"
-#include "./gerente.hpp"
+/*#include "./pessoa.hpp"*/
+#include "asg.hpp"
+#include "vendedor.hpp"
+#include "gerente.hpp"
 #include <vector>
 #include <fstream>
 #include <iostream>
-
-using namespace std;
 
 class Empresa{
     private:
@@ -51,7 +49,7 @@ class Empresa{
     void buscaFuncionario(string matricula);
     void calculaSalarioFuncionario(string matricula);
     void calculaTodosOsSalarios();
-    void calculaRecisao(string matricula, Data desligamento);
+    void calculaRecisaoFuncionario(string matricula, Data desligamento);
 };
 
 #endif

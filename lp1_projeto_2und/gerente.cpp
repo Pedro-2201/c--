@@ -1,11 +1,9 @@
-#include "./gerente.hpp"
-
-using namespace std;
+#include "gerente.hpp"
 
 Gerente::Gerente(){
 
 }
-Gerente::Gerente(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, float participacaoLucros){
+Gerente::Gerente(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, float participacaoLucros, int faltas){
     this->nome = nome;
     this->cpf = cpf;
     this->dataNascimento = dataNascimento;
@@ -16,6 +14,7 @@ Gerente::Gerente(string nome, string cpf, Data dataNascimento, Endereco endereco
     this->matricula = matricula;
     this->ingressoEmpresa = ingressoEmpresa;
     this->participacaoLucros = participacaoLucros;
+    this->faltas = faltas;
 }
 void Gerente::setParticipacaoLucros(float participacaoLucros){
     this->participacaoLucros = participacaoLucros;

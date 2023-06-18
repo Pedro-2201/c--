@@ -1,11 +1,9 @@
 #include "./vendedor.hpp"
 
-using namespace std;
-
 Vendedor::Vendedor(){
 
 }
-Vendedor::Vendedor(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, char tipoVendedor){
+Vendedor::Vendedor(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, char tipoVendedor, int faltas){
     this->nome = nome;
     this->cpf = cpf;
     this->dataNascimento = dataNascimento;
@@ -16,6 +14,7 @@ Vendedor::Vendedor(string nome, string cpf, Data dataNascimento, Endereco endere
     this->matricula = matricula;
     this->ingressoEmpresa = ingressoEmpresa;
     this->tipoVendedor = tipoVendedor;
+    this->faltas = faltas;
 }
 void Vendedor::setTipoVendedor(char tipoVendedor){
     this->tipoVendedor = tipoVendedor;

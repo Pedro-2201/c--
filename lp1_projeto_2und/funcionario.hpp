@@ -2,11 +2,10 @@
 #define FUNCIONARIO_HPP
 
 #include "util.hpp"
-using namespace std;
 
 class Funcionario{
     protected:
-    float salario; //mudei o salário para float
+    float salario;
     string matricula;
     Data ingressoEmpresa;
     int faltas;
@@ -19,7 +18,7 @@ class Funcionario{
     void setIngressoEmpresa(Data ingressoEmpresa);
     Data getIngressoEmpresa();
     void setFaltas(int faltas);
-    float getFaltas();
+    int getFaltas();
     virtual float calcularSalario(int diasFaltas) = 0;
     virtual float calcularRecisao(Data desligamento) = 0;
 };

@@ -1,6 +1,4 @@
-#include "./empresa.hpp"
-
-using namespace std;
+#include "empresa.hpp"
 
 Empresa::Empresa(){
 
@@ -55,12 +53,13 @@ vector<Gerente> Empresa::getGerente(){
 void Empresa::carregarFuncoes(){
     vector<string> funcoes;
     fstream arquivoFuncao;
-    arquivoFuncao.open("./arquivosLeita/funcoes.txt", ios::in | ios::app);
+    arquivoFuncao.open("arquivosLeita/funcoes.txt", ios::in | ios::app);
     while(!arquivoFuncao.eof()){
         string aux;
         getline(arquivoFuncao, aux);
         funcoes.push_back(aux);
     }
+    cout << "teste";
     arquivoFuncao.close();
     for(int i = 0; i < funcoes.size(); i++){
         if(funcoes[i] == "carregarEmpresa()"){
@@ -89,12 +88,12 @@ void Empresa::carregarFuncoes(){
             i++;
         }else if(funcoes[i] == "calculaTodoOsSalarios()"){
             calculaTodosOsSalarios();
-        }else if(funcoes[i] == "calcularRecisao()"){
+        }else if(funcoes[i] == "calculaRecisaoFuncionario()"){
             Data data;
             data.ano = stoi(funcoes[i + 2]);
             data.mes = stoi(funcoes[i + 3]);
             data.dia = stoi(funcoes[i + 4]);
-            calculaRecisao(funcoes[i + 1], data);
+            calculaRecisaoFuncionario(funcoes[i + 1], data);
             i += 4;
         }
     }
@@ -102,7 +101,7 @@ void Empresa::carregarFuncoes(){
 void Empresa::carregarEmpresa(){
     vector<string> empresaDados;
     fstream arquivoEmpresa;
-    arquivoEmpresa.open("./arquivosLeita/empresa.txt", ios::in | ios::app);
+    arquivoEmpresa.open("arquivosLeita/empresa.txt", ios::in | ios::app);
     while(!arquivoEmpresa.eof()){
         string aux;
         getline(arquivoEmpresa, aux);
@@ -116,7 +115,7 @@ void Empresa::carregarEmpresa(){
 void Empresa::carregarAsg(){
     vector<string> asgsDados;
     fstream arquivoAsg;
-    arquivoAsg.open("../arquivosLeita/asg.txt", ios::in | ios::app);
+    arquivoAsg.open("arquivosLeita/asg.txt", ios::in | ios::app);
     while(!arquivoAsg.eof()){
         string aux;
         getline(arquivoAsg, aux);
@@ -155,7 +154,7 @@ void Empresa::carregarAsg(){
 void Empresa::carregarVendedor(){
     vector<string> vendedoresDados;
     fstream arquivoVendedor;
-    arquivoVendedor.open("../arquivosLeita/vendedor.txt", ios::in | ios::app);
+    arquivoVendedor.open("arquivosLeita/vendedor.txt", ios::in | ios::app);
     while(!arquivoVendedor.eof()){
         string aux;
         getline(arquivoVendedor, aux);
@@ -194,7 +193,7 @@ void Empresa::carregarVendedor(){
 void Empresa::carregarGerente(){
     vector<string> gerentesDados;
     fstream arquivoGerente;
-    arquivoGerente.open("../arquivosLeita/gerente.txt", ios::in | ios::app);
+    arquivoGerente.open("arquivosLeita/gerente.txt", ios::in | ios::app);
     while(!arquivoGerente.eof()){
         string aux;
         getline(arquivoGerente, aux);
@@ -231,35 +230,31 @@ void Empresa::carregarGerente(){
     }
 }
 void Empresa::carregarDono(){
+    Data auxData;
+    Endereco auxEndereco;
     vector<string> donoDados;
     fstream arquivoDono;
-    arquivoDono.open("../arquivosLeita/dono.txt", ios::in | ios::app);
+    arquivoDono.open("arquivosLeita/dono.txt", ios::in | ios::app);
     while(!arquivoDono.eof()){
         string aux;
         getline(arquivoDono, aux);
         donoDados.push_back(aux);
     }
     arquivoDono.close();
-    for(int i = 3; i < donoDados.size(); i += 16){
-        Gerente dono;
-        Data auxData;
-        Endereco auxEndereco;
-        dono.setNome(donoDados[i]);
-        dono.setCpf(donoDados[i + 1]);
-        dono.setQtdFilhos(stoi(donoDados[i + 2]));
-        dono.setEstadoCivil(donoDados[i + 3]);
-        auxEndereco.cidade = donoDados[i +  4];
-        auxEndereco.cep = donoDados[i + 5];
-        auxEndereco.bairro = donoDados[i + 6];
-        auxEndereco.rua = donoDados[i + 7];
-        auxEndereco.numero = stoi(donoDados[i + 8]);
-        dono.setEnderecoPessoal(auxEndereco);
-        auxData.ano = stoi(donoDados[i + 9]);
-        auxData.mes = stoi(donoDados[i + 10]);
-        auxData.dia = stoi(donoDados[i + 11]);
-        dono.setDataNascimento(auxData);
-        gerentes.push_back(dono);
-    }
+    dono.setNome(donoDados[3]);
+    dono.setCpf(donoDados[4]);
+    dono.setQtdFilhos(stoi(donoDados[5]));
+    dono.setEstadoCivil(donoDados[6]);
+    auxEndereco.cidade = donoDados[7];
+    auxEndereco.cep = donoDados[8];
+    auxEndereco.bairro = donoDados[9];
+    auxEndereco.rua = donoDados[10];
+    auxEndereco.numero = stoi(donoDados[11]);
+    dono.setEnderecoPessoal(auxEndereco);
+    auxData.ano = stoi(donoDados[12]);
+    auxData.mes = stoi(donoDados[13]);
+    auxData.dia = stoi(donoDados[14]);
+    dono.setDataNascimento(auxData);
 }
 void Empresa::imprimeAsgs(){
     cout << endl << "#########################################################" << endl; 
@@ -343,7 +338,7 @@ void Empresa::imprimeGerentes(){
         cout << "Matrícula: " << gerentes[i].getMatricula() << endl;
         cout << "Salário: " << gerentes[i].getSalario() << endl;
         cout << "Participação nos lucros: " << gerentes[i].getParticipacaoLucros() << endl;
-        cout << "Faltas: " << asgs[i].getFaltas() << endl;
+        cout << "Faltas: " << gerentes[i].getFaltas() << endl;
         cout << "***** Data de ingresso (ano, mes, dia) ****" << endl;
         cout << "Ano: " << gerentes[i].getIngressoEmpresa().ano << endl;
         cout << "Mês: " << gerentes[i].getIngressoEmpresa().mes << endl;
@@ -459,7 +454,7 @@ void Empresa::calculaTodosOsSalarios(){
     cout << endl << "Total dos salários: " << totalSalarios << endl;
     cout << endl << "#########################################################" << endl; 
 }
-void Empresa::calculaRecisao(string matricula, Data desligamento){
+void Empresa::calculaRecisaoFuncionario(string matricula, Data desligamento){
     int encontrado = 0;
     cout << endl << "#########################################################" << endl; 
     for(int i = 0; i < asgs.size() && encontrado == 0; i++){

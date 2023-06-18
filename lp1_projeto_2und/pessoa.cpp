@@ -1,7 +1,4 @@
-#include "./util.hpp"
-#include "./pessoa.hpp"
-
-using namespace std;
+#include "pessoa.hpp"
 
 Pessoa::Pessoa(){
     

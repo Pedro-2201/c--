@@ -12,7 +12,7 @@ buscaFuncionario()
 calculaSalarioFuncionario()
 72.123-7
 calculaTodoOsSalarios()
-calcularRecisao()
+calculaRecisaoFuncionario()
 72.280-8
 2023
 10

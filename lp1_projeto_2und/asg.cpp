@@ -1,11 +1,9 @@
 #include "asg.hpp"
 
-using namespace std;
-
 Asg::Asg(){
 
 }
-Asg::Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, float adicionalInsalubridade){
+Asg::Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal, string estadoCivil, int qtdFilhos, float salario, string matricula, Data ingressoEmpresa, float adicionalInsalubridade, int faltas){
     this->nome = nome;
     this->cpf = cpf;
     this->dataNascimento = dataNascimento;
@@ -16,6 +14,7 @@ Asg::Asg(string nome, string cpf, Data dataNascimento, Endereco enderecoPessoal,
     this->matricula = matricula;
     this->ingressoEmpresa = ingressoEmpresa;
     this->adicionalInsalubridade = adicionalInsalubridade;
+    this->faltas = faltas;
 }
 void Asg::setAdicionalInsalubridade(float adicionalInsalubridade){
     this->adicionalInsalubridade = adicionalInsalubridade;
@@ -32,7 +31,7 @@ float Asg::calcularSalario(int diasFaltas){
 }
 float Asg::calcularRecisao(Data desligamento){
     float valorRescisao;
-    int tempoTrabalho;
+    int tempoTrabalho = 2;
     if(desligamento.ano > ingressoEmpresa.ano){
         if(desligamento.mes > ingressoEmpresa.mes || desligamento.mes == ingressoEmpresa.mes && desligamento.dia >= ingressoEmpresa.dia){
             tempoTrabalho = desligamento.ano - ingressoEmpresa.ano;

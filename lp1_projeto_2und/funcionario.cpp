@@ -1,7 +1,5 @@
 #include "funcionario.hpp"
 
-using namespace std;
-
 void Funcionario::setSalario(float salario){
     this->salario = salario;
 }
@@ -23,6 +21,6 @@ Data Funcionario::getIngressoEmpresa(){
 void Funcionario::setFaltas(int faltas){
     this->faltas = faltas;
 }
-float Funcionario::getFaltas(){
+int Funcionario::getFaltas(){
     return faltas;
 }

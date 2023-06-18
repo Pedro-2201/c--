@@ -1,9 +1,7 @@
 #ifndef PESSOA_HPP
 #define PESSOA_HPP
 
-#include "./util.hpp"
-
-using namespace std;
+#include "util.hpp"
 
 class Pessoa{
   protected:
@@ -11,7 +9,7 @@ class Pessoa{
   string cpf;
   Data dataNascimento;
   Endereco enderecoPessoal;
-  string estadoCivil; //Como limitar as opção de preenchimento
+  string estadoCivil;
   int qtdFilhos;
 
   public:
