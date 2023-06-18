@@ -27,6 +27,7 @@ float Asg::calcularSalario(int diasFaltas){
     float salarioLiquido = salario;
     salarioLiquido -= salarioLiquido / 30 * faltas;
     salarioLiquido += 100 * qtdFilhos;
+    salarioLiquido += salario * adicionalInsalubridade;
     return salarioLiquido;
 }
 float Asg::calcularRecisao(Data desligamento){

@@ -108,6 +108,7 @@ void Empresa::carregarEmpresa(){
         getline(arquivoEmpresa, aux);
         empresaDados.push_back(aux);
     }
+    arquivoEmpresa.close();
     nomeEmpresa = empresaDados[2];
     cnpj = empresaDados[3];
     faturamentoMensal = stof(empresaDados[4]);
@@ -121,38 +122,369 @@ void Empresa::carregarAsg(){
         getline(arquivoAsg, aux);
         asgsDados.push_back(aux);
     }
-    
+    arquivoAsg.close();
+    for(int i = 4; i < asgsDados.size(); i += 26){
+        Asg asg;
+        Data auxData;
+        Endereco auxEndereco;
+        asg.setNome(asgsDados[i]);
+        asg.setCpf(asgsDados[i + 1]);
+        asg.setQtdFilhos(stoi(asgsDados[i + 2]));
+        asg.setEstadoCivil(asgsDados[i + 3]);
+        auxEndereco.cidade = asgsDados[i +  5];
+        auxEndereco.cep = asgsDados[i + 6];
+        auxEndereco.bairro = asgsDados[i + 7];
+        auxEndereco.rua = asgsDados[i + 8];
+        auxEndereco.numero = stoi(asgsDados[i + 9]);
+        asg.setEnderecoPessoal(auxEndereco);
+        auxData.ano = stoi(asgsDados[i + 11]);
+        auxData.mes = stoi(asgsDados[i + 12]);
+        auxData.dia = stoi(asgsDados[i + 13]);
+        asg.setDataNascimento(auxData);
+        asg.setMatricula(asgsDados[i + 15]);
+        asg.setSalario(stof(asgsDados[i + 16]));
+        asg.setAdicionalInsalubridade(stof(asgsDados[i + 17]));
+        asg.setFaltas(stoi(asgsDados[i + 18]));
+        auxData.ano = stoi(asgsDados[i + 20]);
+        auxData.mes = stoi(asgsDados[i + 21]);
+        auxData.dia = stoi(asgsDados[i + 22]);
+        asg.setIngressoEmpresa(auxData);
+        asgs.push_back(asg);
+    }
 }
 void Empresa::carregarVendedor(){
-
+    vector<string> vendedoresDados;
+    fstream arquivoVendedor;
+    arquivoVendedor.open("../arquivosLeita/vendedor.txt", ios::in | ios::app);
+    while(!arquivoVendedor.eof()){
+        string aux;
+        getline(arquivoVendedor, aux);
+        vendedoresDados.push_back(aux);
+    }
+    arquivoVendedor.close();
+    for(int i = 4; i < vendedoresDados.size(); i += 26){
+        Vendedor vendedor;
+        Data auxData;
+        Endereco auxEndereco;
+        vendedor.setNome(vendedoresDados[i]);
+        vendedor.setCpf(vendedoresDados[i + 1]);
+        vendedor.setQtdFilhos(stoi(vendedoresDados[i + 2]));
+        vendedor.setEstadoCivil(vendedoresDados[i + 3]);
+        auxEndereco.cidade = vendedoresDados[i +  5];
+        auxEndereco.cep = vendedoresDados[i + 6];
+        auxEndereco.bairro = vendedoresDados[i + 7];
+        auxEndereco.rua = vendedoresDados[i + 8];
+        auxEndereco.numero = stoi(vendedoresDados[i + 9]);
+        vendedor.setEnderecoPessoal(auxEndereco);
+        auxData.ano = stoi(vendedoresDados[i + 11]);
+        auxData.mes = stoi(vendedoresDados[i + 12]);
+        auxData.dia = stoi(vendedoresDados[i + 13]);
+        vendedor.setDataNascimento(auxData);
+        vendedor.setMatricula(vendedoresDados[i + 15]);
+        vendedor.setSalario(stof(vendedoresDados[i + 16]));
+        vendedor.setTipoVendedor(vendedoresDados[i + 17][0]);
+        vendedor.setFaltas(stoi(vendedoresDados[i + 18]));
+        auxData.ano = stoi(vendedoresDados[i + 20]);
+        auxData.mes = stoi(vendedoresDados[i + 21]);
+        auxData.dia = stoi(vendedoresDados[i + 22]);
+        vendedor.setIngressoEmpresa(auxData);
+        vendedores.push_back(vendedor);
+    }
 }
 void Empresa::carregarGerente(){
-
+    vector<string> gerentesDados;
+    fstream arquivoGerente;
+    arquivoGerente.open("../arquivosLeita/gerente.txt", ios::in | ios::app);
+    while(!arquivoGerente.eof()){
+        string aux;
+        getline(arquivoGerente, aux);
+        gerentesDados.push_back(aux);
+    }
+    arquivoGerente.close();
+    for(int i = 4; i < gerentesDados.size(); i += 26){
+        Gerente gerente;
+        Data auxData;
+        Endereco auxEndereco;
+        gerente.setNome(gerentesDados[i]);
+        gerente.setCpf(gerentesDados[i + 1]);
+        gerente.setQtdFilhos(stoi(gerentesDados[i + 2]));
+        gerente.setEstadoCivil(gerentesDados[i + 3]);
+        auxEndereco.cidade = gerentesDados[i +  5];
+        auxEndereco.cep = gerentesDados[i + 6];
+        auxEndereco.bairro = gerentesDados[i + 7];
+        auxEndereco.rua = gerentesDados[i + 8];
+        auxEndereco.numero = stoi(gerentesDados[i + 9]);
+        gerente.setEnderecoPessoal(auxEndereco);
+        auxData.ano = stoi(gerentesDados[i + 11]);
+        auxData.mes = stoi(gerentesDados[i + 12]);
+        auxData.dia = stoi(gerentesDados[i + 13]);
+        gerente.setDataNascimento(auxData);
+        gerente.setMatricula(gerentesDados[i + 15]);
+        gerente.setSalario(stof(gerentesDados[i + 16]));
+        gerente.setParticipacaoLucros(stof(gerentesDados[i + 17]));
+        gerente.setFaltas(stoi(gerentesDados[i + 18]));
+        auxData.ano = stoi(gerentesDados[i + 20]);
+        auxData.mes = stoi(gerentesDados[i + 21]);
+        auxData.dia = stoi(gerentesDados[i + 22]);
+        gerente.setIngressoEmpresa(auxData);
+        gerentes.push_back(gerente);
+    }
 }
 void Empresa::carregarDono(){
-
+    vector<string> donoDados;
+    fstream arquivoDono;
+    arquivoDono.open("../arquivosLeita/dono.txt", ios::in | ios::app);
+    while(!arquivoDono.eof()){
+        string aux;
+        getline(arquivoDono, aux);
+        donoDados.push_back(aux);
+    }
+    arquivoDono.close();
+    for(int i = 3; i < donoDados.size(); i += 16){
+        Gerente dono;
+        Data auxData;
+        Endereco auxEndereco;
+        dono.setNome(donoDados[i]);
+        dono.setCpf(donoDados[i + 1]);
+        dono.setQtdFilhos(stoi(donoDados[i + 2]));
+        dono.setEstadoCivil(donoDados[i + 3]);
+        auxEndereco.cidade = donoDados[i +  4];
+        auxEndereco.cep = donoDados[i + 5];
+        auxEndereco.bairro = donoDados[i + 6];
+        auxEndereco.rua = donoDados[i + 7];
+        auxEndereco.numero = stoi(donoDados[i + 8]);
+        dono.setEnderecoPessoal(auxEndereco);
+        auxData.ano = stoi(donoDados[i + 9]);
+        auxData.mes = stoi(donoDados[i + 10]);
+        auxData.dia = stoi(donoDados[i + 11]);
+        dono.setDataNascimento(auxData);
+        gerentes.push_back(dono);
+    }
 }
 void Empresa::imprimeAsgs(){
-
+    cout << endl << "#########################################################" << endl; 
+    for(int i = 0; i < asgs.size(); i++){
+        cout << "##### DADOS PESSOAIS #####" << endl;
+        cout << "Nome: " << asgs[i].getNome() << endl;
+        cout << "CPF: " << asgs[i].getCpf() << endl;
+        cout << "Número de filhos: " << asgs[i].getQtdFilhos() << endl;
+        cout << "Estado civil: " << asgs[i].getEstavoCival() << endl;
+        cout << "***** Endereço (cidade, cep, bairro, rua e numero) ****" << endl;
+        cout << "Cidade: " << asgs[i].getEnderecoPessoal().cidade << endl;
+        cout << "Cep: " << asgs[i].getEnderecoPessoal().cep << endl;
+        cout << "Bairro: " << asgs[i].getEnderecoPessoal().bairro << endl;
+        cout << "Rua: " << asgs[i].getEnderecoPessoal().rua << endl;
+        cout << "Número: " << asgs[i].getEnderecoPessoal().numero << endl;
+        cout << "***** Data de nascimento (ano, mes, dia) **** - Essa linha deve ser ignorada" << endl;
+        cout << "Ano: " << asgs[i].getDataNascimento().ano << endl;
+        cout << "Mês: " << asgs[i].getDataNascimento().mes << endl;
+        cout << "Dia: " << asgs[i].getDataNascimento().dia<< endl;
+        cout << "##### DADOS FUNCIONAIS #####" << endl;
+        cout << "Matrícula: " << asgs[i].getMatricula() << endl;
+        cout << "Salário: " << asgs[i].getSalario() << endl;
+        cout << "Insalubridade: " << asgs[i].getAdicionalInsalubridade() << endl;
+        cout << "Faltas: " << asgs[i].getFaltas() << endl;
+        cout << "***** Data de ingresso (ano, mes, dia) ****" << endl;
+        cout << "Ano: " << asgs[i].getIngressoEmpresa().ano << endl;
+        cout << "Mês: " << asgs[i].getIngressoEmpresa().mes << endl;
+        cout << "Dia: " << asgs[i].getIngressoEmpresa().dia << endl;
+    }
+    cout << endl << "#########################################################" << endl; 
 }
 void Empresa::imprimeVendedores(){
-
+    cout << endl << "#########################################################" << endl; 
+    for(int i = 0; i < vendedores.size(); i++){
+        cout << "##### DADOS PESSOAIS #####" << endl;
+        cout << "Nome: " << vendedores[i].getNome() << endl;
+        cout << "CPF: " << vendedores[i].getCpf() << endl;
+        cout << "Número de filhos: " << vendedores[i].getQtdFilhos() << endl;
+        cout << "Estado civil: " << vendedores[i].getEstavoCival() << endl;
+        cout << "***** Endereço (cidade, cep, bairro, rua e numero) ****" << endl;
+        cout << "Cidade: " << vendedores[i].getEnderecoPessoal().cidade << endl;
+        cout << "Cep: " << vendedores[i].getEnderecoPessoal().cep << endl;
+        cout << "Bairro: " << vendedores[i].getEnderecoPessoal().bairro << endl;
+        cout << "Rua: " << vendedores[i].getEnderecoPessoal().rua << endl;
+        cout << "Número: " << vendedores[i].getEnderecoPessoal().numero << endl;
+        cout << "***** Data de nascimento (ano, mes, dia) **** - Essa linha deve ser ignorada" << endl;
+        cout << "Ano: " << vendedores[i].getDataNascimento().ano << endl;
+        cout << "Mês: " << vendedores[i].getDataNascimento().mes << endl;
+        cout << "Dia: " << vendedores[i].getDataNascimento().dia<< endl;
+        cout << "##### DADOS FUNCIONAIS #####" << endl;
+        cout << "Matrícula: " << vendedores[i].getMatricula() << endl;
+        cout << "Salário: " << vendedores[i].getSalario() << endl;
+        cout << "Tipo de vendedor: " << vendedores[i].getTipoVendedor() << endl;
+        cout << "Faltas: " << vendedores[i].getFaltas() << endl;
+        cout << "***** Data de ingresso (ano, mes, dia) ****" << endl;
+        cout << "Ano: " << vendedores[i].getIngressoEmpresa().ano << endl;
+        cout << "Mês: " << vendedores[i].getIngressoEmpresa().mes << endl;
+        cout << "Dia: " << vendedores[i].getIngressoEmpresa().dia << endl;
+    }
+    cout << endl << "#########################################################" << endl; 
 }
 void Empresa::imprimeGerentes(){
-
+    cout << endl << "#########################################################" << endl; 
+    for(int i = 0; i < gerentes.size(); i++){
+        cout << "##### DADOS PESSOAIS #####" << endl;
+        cout << "Nome: " << gerentes[i].getNome() << endl;
+        cout << "CPF: " << gerentes[i].getCpf() << endl;
+        cout << "Número de filhos: " << gerentes[i].getQtdFilhos() << endl;
+        cout << "Estado civil: " << gerentes[i].getEstavoCival() << endl;
+        cout << "***** Endereço (cidade, cep, bairro, rua e numero) ****" << endl;
+        cout << "Cidade: " << gerentes[i].getEnderecoPessoal().cidade << endl;
+        cout << "Cep: " << gerentes[i].getEnderecoPessoal().cep << endl;
+        cout << "Bairro: " << gerentes[i].getEnderecoPessoal().bairro << endl;
+        cout << "Rua: " << gerentes[i].getEnderecoPessoal().rua << endl;
+        cout << "Número: " << gerentes[i].getEnderecoPessoal().numero << endl;
+        cout << "***** Data de nascimento (ano, mes, dia) **** - Essa linha deve ser ignorada" << endl;
+        cout << "Ano: " << gerentes[i].getDataNascimento().ano << endl;
+        cout << "Mês: " << gerentes[i].getDataNascimento().mes << endl;
+        cout << "Dia: " << gerentes[i].getDataNascimento().dia<< endl;
+        cout << "##### DADOS FUNCIONAIS #####" << endl;
+        cout << "Matrícula: " << gerentes[i].getMatricula() << endl;
+        cout << "Salário: " << gerentes[i].getSalario() << endl;
+        cout << "Participação nos lucros: " << gerentes[i].getParticipacaoLucros() << endl;
+        cout << "Faltas: " << asgs[i].getFaltas() << endl;
+        cout << "***** Data de ingresso (ano, mes, dia) ****" << endl;
+        cout << "Ano: " << gerentes[i].getIngressoEmpresa().ano << endl;
+        cout << "Mês: " << gerentes[i].getIngressoEmpresa().mes << endl;
+        cout << "Dia: " << gerentes[i].getIngressoEmpresa().dia << endl;
+    }
+    cout << endl << "#########################################################" << endl; 
 }
 void Empresa::imprimeDono(){
-
+    cout << endl << "#########################################################" << endl; 
+    cout << "##### DADOS PESSOAIS #####" << endl;
+    cout << "Nome: " << dono.getNome() << endl;
+    cout << "CPF: " << dono.getCpf() << endl;
+    cout << "Número de filhos: " << dono.getQtdFilhos() << endl;
+    cout << "Estado civil: " << dono.getEstavoCival() << endl;
+    cout << "***** Endereço (cidade, cep, bairro, rua e numero) ****" << endl;
+    cout << "Cidade: " << dono.getEnderecoPessoal().cidade << endl;
+    cout << "Cep: " << dono.getEnderecoPessoal().cep << endl;
+    cout << "Bairro: " << dono.getEnderecoPessoal().bairro << endl;
+    cout << "Rua: " << dono.getEnderecoPessoal().rua << endl;
+    cout << "Número: " << dono.getEnderecoPessoal().numero << endl;
+    cout << "***** Data de nascimento (ano, mes, dia) **** - Essa linha deve ser ignorada" << endl;
+    cout << "Ano: " << dono.getDataNascimento().ano << endl;
+    cout << "Mês: " << dono.getDataNascimento().mes << endl;
+    cout << "Dia: " << dono.getDataNascimento().dia<< endl;
+    cout << endl << "#########################################################" << endl; 
 }
 void Empresa::buscaFuncionario(string matricula){
-
+    int encontrado = 0;
+    cout << endl << "#########################################################" << endl; 
+    for(int i = 0; i < asgs.size() && encontrado == 0; i++){
+        if(asgs[i].getMatricula() == matricula){
+            cout << "Funcionário encontrado" << endl;
+            cout << "Nome:" << asgs[i].getNome() << endl;
+            encontrado = 1;
+            return;
+        }
+    }
+    for(int i = 0; i < vendedores.size() && encontrado == 0; i++){
+        if(vendedores[i].getMatricula() == matricula){
+            cout << "Funcionário encontrado" << endl;
+            cout << "Nome:" << vendedores[i].getNome() << endl;
+            encontrado = 1;
+            return;
+        }
+    }
+    for(int i = 0; i < gerentes.size() && encontrado == 0; i++){
+        if(gerentes[i].getMatricula() == matricula){
+            cout << "Funcionário encontrado" << endl;
+            cout << "Nome:" << gerentes[i].getNome() << endl;
+            encontrado = 1;
+            return;
+        }
+    }
+    if(encontrado == 0){
+        cout << "Funcionário não contrado" << endl;
+    }
+    cout << endl << "#########################################################" << endl; 
 }
 void Empresa::calculaSalarioFuncionario(string matricula){
-
+    int encontrado = 0;
+    cout << endl << "#########################################################" << endl; 
+    for(int i = 0; i < asgs.size() && encontrado == 0; i++){
+        if(asgs[i].getMatricula() == matricula){
+            cout << "Nome:" << asgs[i].getNome() << endl;
+            cout << "Salário: " << asgs[i].calcularSalario(asgs[i].getFaltas()) << endl;
+            encontrado = 1;
+        }
+    }
+    for(int i = 0; i < vendedores.size() && encontrado == 0; i++){
+        if(vendedores[i].getMatricula() == matricula){
+            cout << "Nome:" << vendedores[i].getNome() << endl;
+            cout << "Salário: " << vendedores[i].calcularSalario(vendedores[i].getFaltas()) << endl;
+            encontrado = 1;
+        }
+    }
+    for(int i = 0; i < gerentes.size() && encontrado == 0; i++){
+        if(gerentes[i].getMatricula() == matricula){
+            cout << "Nome:" << gerentes[i].getNome() << endl;
+            cout << "Salário: " << gerentes[i].calcularSalario(gerentes[i].getFaltas()) << endl;
+            encontrado = 1;
+        }
+    }
+    if(encontrado == 0){
+        cout << "Funcionário não contrado" << endl;
+    }
+    cout << endl << "#########################################################" << endl; 
 }
 void Empresa::calculaTodosOsSalarios(){
+    float totalSalarios = 0;
+    cout << endl << "#########################################################" << endl; 
 
+    cout << "***** ASGs ****" << endl;
+    for(int i = 0; i < asgs.size(); i++){
+        cout << "Nome:" << asgs[i].getNome() << endl;
+        cout << "Salário: " << asgs[i].calcularSalario(asgs[i].getFaltas()) << endl;
+        totalSalarios += asgs[i].calcularSalario(asgs[i].getFaltas());
+    }
+
+    cout << "***** Vendedores ****" << endl;
+    for(int i = 0; i < vendedores.size(); i++){
+        cout << "Nome:" << vendedores[i].getNome() << endl;
+        cout << "Salário: " << vendedores[i].calcularSalario(vendedores[i].getFaltas()) << endl;
+        totalSalarios += vendedores[i].calcularSalario(vendedores[i].getFaltas());
+    }
+
+    cout << "***** Gerentes ****" << endl;
+    for(int i = 0; i < gerentes.size(); i++){
+        cout << "Nome:" << gerentes[i].getNome() << endl;
+        cout << "Salário: " << gerentes[i].calcularSalario(gerentes[i].getFaltas()) << endl;
+        totalSalarios += gerentes[i].calcularSalario(gerentes[i].getFaltas());
+    }
+
+    cout << endl << "Total dos salários: " << totalSalarios << endl;
+    cout << endl << "#########################################################" << endl; 
 }
 void Empresa::calculaRecisao(string matricula, Data desligamento){
-
+    int encontrado = 0;
+    cout << endl << "#########################################################" << endl; 
+    for(int i = 0; i < asgs.size() && encontrado == 0; i++){
+        if(asgs[i].getMatricula() == matricula){
+            cout << "Nome:" << asgs[i].getNome() << endl;
+            cout << "Salário: " << asgs[i].calcularRecisao(desligamento) << endl;
+            encontrado = 1;
+        }
+    }
+    for(int i = 0; i < vendedores.size() && encontrado == 0; i++){
+        if(vendedores[i].getMatricula() == matricula){
+            cout << "Nome:" << vendedores[i].getNome() << endl;
+            cout << "Salário: " << vendedores[i].calcularRecisao(desligamento) << endl;
+            encontrado = 1;
+        }
+    }
+    for(int i = 0; i < gerentes.size() && encontrado == 0; i++){
+        if(gerentes[i].getMatricula() == matricula){
+            cout << "Nome:" << gerentes[i].getNome() << endl;
+            cout << "Salário: " << gerentes[i].calcularRecisao(desligamento) << endl;
+            encontrado = 1;
+        }
+    }
+    if(encontrado == 0){
+        cout << "Funcionário não contrado" << endl;
+    }
+    cout << endl << "#########################################################" << endl; 
 }

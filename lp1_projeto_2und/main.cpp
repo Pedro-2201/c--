@@ -1,12 +1,7 @@
 #include <iostream>
+#include "./empresa.hpp"
 
 int main(){
-    std::string nome;
+    Empresa* atacadoDosCalcado = new Empresa("Atacado dos Calcados","40.101.588/0001-98", 156289.56);
+    atacadoDosCalcado->carregarFuncoes();
 }
-
-/*
-Pode alterar o tipo de algumas variaveis, tipo salário de string para inteiro?
-Como calcular os as faltas, o dinheiro que será descontado?
-Posso colocar as classes de private para protected?
-Para calcular o tempo de empresa posso so subtrair os anos ou preciso levar em consideração toda a data?
-*/
