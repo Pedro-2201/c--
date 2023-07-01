@@ -1,7 +1,6 @@
 #ifndef EMPRESA_HPP
 #define EMPRESA_HPP
 
-/*#include "./pessoa.hpp"*/
 #include "asg.hpp"
 #include "vendedor.hpp"
 #include "gerente.hpp"
@@ -14,7 +13,7 @@ class Empresa{
     float faturamentoMensal;
     string nomeEmpresa;
     string cnpj;
-    Pessoa dono;
+    Pessoa *dono = new Pessoa();
     vector<Asg> asgs;
     vector<Vendedor> vendedores;
     vector<Gerente> gerentes;

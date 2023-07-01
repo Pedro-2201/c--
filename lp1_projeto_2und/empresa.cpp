@@ -26,12 +26,12 @@ void Empresa::setCnpj(string cnpj){
 string Empresa::getCnpj(){
     return cnpj;
 }
-void Empresa::setDono(Pessoa dono){
+/*void Empresa::setDono(Pessoa dono){
     this->dono = dono;
 }
 Pessoa Empresa::getDono(){
     return dono;
-}
+}*/
 void Empresa::setAsg(Asg asgs){
     this->asgs.push_back(asgs);
 }
@@ -53,13 +53,12 @@ vector<Gerente> Empresa::getGerente(){
 void Empresa::carregarFuncoes(){
     vector<string> funcoes;
     fstream arquivoFuncao;
-    arquivoFuncao.open("arquivosLeita/funcoes.txt", ios::in | ios::app);
+    arquivoFuncao.open("arquivosLeitura/funcoes.txt", ios::in | ios::app);
     while(!arquivoFuncao.eof()){
         string aux;
         getline(arquivoFuncao, aux);
         funcoes.push_back(aux);
     }
-    cout << "teste";
     arquivoFuncao.close();
     for(int i = 0; i < funcoes.size(); i++){
         if(funcoes[i] == "carregarEmpresa()"){
@@ -101,7 +100,7 @@ void Empresa::carregarFuncoes(){
 void Empresa::carregarEmpresa(){
     vector<string> empresaDados;
     fstream arquivoEmpresa;
-    arquivoEmpresa.open("arquivosLeita/empresa.txt", ios::in | ios::app);
+    arquivoEmpresa.open("arquivosLeitura/empresa.txt", ios::in | ios::app);
     while(!arquivoEmpresa.eof()){
         string aux;
         getline(arquivoEmpresa, aux);
@@ -115,14 +114,14 @@ void Empresa::carregarEmpresa(){
 void Empresa::carregarAsg(){
     vector<string> asgsDados;
     fstream arquivoAsg;
-    arquivoAsg.open("arquivosLeita/asg.txt", ios::in | ios::app);
+    arquivoAsg.open("arquivosLeitura/asg.txt", ios::in | ios::app);
     while(!arquivoAsg.eof()){
         string aux;
         getline(arquivoAsg, aux);
         asgsDados.push_back(aux);
     }
     arquivoAsg.close();
-    for(int i = 4; i < asgsDados.size(); i += 26){
+    for(int i = 3; i < asgsDados.size(); i += 26){
         Asg asg;
         Data auxData;
         Endereco auxEndereco;
@@ -154,14 +153,14 @@ void Empresa::carregarAsg(){
 void Empresa::carregarVendedor(){
     vector<string> vendedoresDados;
     fstream arquivoVendedor;
-    arquivoVendedor.open("arquivosLeita/vendedor.txt", ios::in | ios::app);
+    arquivoVendedor.open("arquivosLeitura/vendedor.txt", ios::in | ios::app);
     while(!arquivoVendedor.eof()){
         string aux;
         getline(arquivoVendedor, aux);
         vendedoresDados.push_back(aux);
     }
     arquivoVendedor.close();
-    for(int i = 4; i < vendedoresDados.size(); i += 26){
+    for(int i = 3; i < vendedoresDados.size(); i += 26){
         Vendedor vendedor;
         Data auxData;
         Endereco auxEndereco;
@@ -193,14 +192,14 @@ void Empresa::carregarVendedor(){
 void Empresa::carregarGerente(){
     vector<string> gerentesDados;
     fstream arquivoGerente;
-    arquivoGerente.open("arquivosLeita/gerente.txt", ios::in | ios::app);
+    arquivoGerente.open("arquivosLeitura/gerente.txt", ios::in | ios::app);
     while(!arquivoGerente.eof()){
         string aux;
         getline(arquivoGerente, aux);
         gerentesDados.push_back(aux);
     }
     arquivoGerente.close();
-    for(int i = 4; i < gerentesDados.size(); i += 26){
+    for(int i = 3; i < gerentesDados.size(); i += 26){
         Gerente gerente;
         Data auxData;
         Endereco auxEndereco;
@@ -234,27 +233,27 @@ void Empresa::carregarDono(){
     Endereco auxEndereco;
     vector<string> donoDados;
     fstream arquivoDono;
-    arquivoDono.open("arquivosLeita/dono.txt", ios::in | ios::app);
+    arquivoDono.open("arquivosLeitura/dono.txt", ios::in | ios::app);
     while(!arquivoDono.eof()){
         string aux;
         getline(arquivoDono, aux);
         donoDados.push_back(aux);
     }
     arquivoDono.close();
-    dono.setNome(donoDados[3]);
-    dono.setCpf(donoDados[4]);
-    dono.setQtdFilhos(stoi(donoDados[5]));
-    dono.setEstadoCivil(donoDados[6]);
+    dono->setNome(donoDados[3]);
+    dono->setCpf(donoDados[4]);
+    dono->setQtdFilhos(stoi(donoDados[5]));
+    dono->setEstadoCivil(donoDados[6]);
     auxEndereco.cidade = donoDados[7];
     auxEndereco.cep = donoDados[8];
     auxEndereco.bairro = donoDados[9];
     auxEndereco.rua = donoDados[10];
     auxEndereco.numero = stoi(donoDados[11]);
-    dono.setEnderecoPessoal(auxEndereco);
+    dono->setEnderecoPessoal(auxEndereco);
     auxData.ano = stoi(donoDados[12]);
     auxData.mes = stoi(donoDados[13]);
     auxData.dia = stoi(donoDados[14]);
-    dono.setDataNascimento(auxData);
+    dono->setDataNascimento(auxData);
 }
 void Empresa::imprimeAsgs(){
     cout << endl << "#########################################################" << endl; 
@@ -349,20 +348,20 @@ void Empresa::imprimeGerentes(){
 void Empresa::imprimeDono(){
     cout << endl << "#########################################################" << endl; 
     cout << "##### DADOS PESSOAIS #####" << endl;
-    cout << "Nome: " << dono.getNome() << endl;
-    cout << "CPF: " << dono.getCpf() << endl;
-    cout << "Número de filhos: " << dono.getQtdFilhos() << endl;
-    cout << "Estado civil: " << dono.getEstavoCival() << endl;
+    cout << "Nome: " << dono->getNome() << endl;
+    cout << "CPF: " << dono->getCpf() << endl;
+    cout << "Número de filhos: " << dono->getQtdFilhos() << endl;
+    cout << "Estado civil: " << dono->getEstavoCival() << endl;
     cout << "***** Endereço (cidade, cep, bairro, rua e numero) ****" << endl;
-    cout << "Cidade: " << dono.getEnderecoPessoal().cidade << endl;
-    cout << "Cep: " << dono.getEnderecoPessoal().cep << endl;
-    cout << "Bairro: " << dono.getEnderecoPessoal().bairro << endl;
-    cout << "Rua: " << dono.getEnderecoPessoal().rua << endl;
-    cout << "Número: " << dono.getEnderecoPessoal().numero << endl;
+    cout << "Cidade: " << dono->getEnderecoPessoal().cidade << endl;
+    cout << "Cep: " << dono->getEnderecoPessoal().cep << endl;
+    cout << "Bairro: " << dono->getEnderecoPessoal().bairro << endl;
+    cout << "Rua: " << dono->getEnderecoPessoal().rua << endl;
+    cout << "Número: " << dono->getEnderecoPessoal().numero << endl;
     cout << "***** Data de nascimento (ano, mes, dia) **** - Essa linha deve ser ignorada" << endl;
-    cout << "Ano: " << dono.getDataNascimento().ano << endl;
-    cout << "Mês: " << dono.getDataNascimento().mes << endl;
-    cout << "Dia: " << dono.getDataNascimento().dia<< endl;
+    cout << "Ano: " << dono->getDataNascimento().ano << endl;
+    cout << "Mês: " << dono->getDataNascimento().mes << endl;
+    cout << "Dia: " << dono->getDataNascimento().dia<< endl;
     cout << endl << "#########################################################" << endl; 
 }
 void Empresa::buscaFuncionario(string matricula){
@@ -460,21 +459,21 @@ void Empresa::calculaRecisaoFuncionario(string matricula, Data desligamento){
     for(int i = 0; i < asgs.size() && encontrado == 0; i++){
         if(asgs[i].getMatricula() == matricula){
             cout << "Nome:" << asgs[i].getNome() << endl;
-            cout << "Salário: " << asgs[i].calcularRecisao(desligamento) << endl;
+            cout << "Valor da rescisão: " << asgs[i].calcularRecisao(desligamento) << endl;
             encontrado = 1;
         }
     }
     for(int i = 0; i < vendedores.size() && encontrado == 0; i++){
         if(vendedores[i].getMatricula() == matricula){
             cout << "Nome:" << vendedores[i].getNome() << endl;
-            cout << "Salário: " << vendedores[i].calcularRecisao(desligamento) << endl;
+            cout << "Valor da rescisão: " << vendedores[i].calcularRecisao(desligamento) << endl;
             encontrado = 1;
         }
     }
     for(int i = 0; i < gerentes.size() && encontrado == 0; i++){
         if(gerentes[i].getMatricula() == matricula){
             cout << "Nome:" << gerentes[i].getNome() << endl;
-            cout << "Salário: " << gerentes[i].calcularRecisao(desligamento) << endl;
+            cout << "Valor da rescisão: " << gerentes[i].calcularRecisao(desligamento) << endl;
             encontrado = 1;
         }
     }
